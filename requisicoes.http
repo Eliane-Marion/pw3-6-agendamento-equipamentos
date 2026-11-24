@@ -1,0 +1,32 @@
+### Arquivo para testar a API pelo IntelliJ / VS Code (extensão REST Client)
+@base = http://localhost:8080/api/armarios
+
+### Listar todas as reservas
+GET {{base}}
+
+### Buscar reserva por id
+GET {{base}}/1
+
+### Criar reserva (armário livre) -> 201
+POST {{base}}
+Content-Type: application/json
+
+{ "numeroArmario": 4, "nomeAluno": "Diego Alves", "dataInicio": "2026-11-25", "dataFim": "2026-12-10" }
+
+### Criar reserva em conflito com o armário 1 -> 409
+POST {{base}}
+Content-Type: application/json
+
+{ "numeroArmario": 1, "nomeAluno": "Eduarda Costa", "dataInicio": "2026-12-01", "dataFim": "2026-12-20" }
+
+### Editar reserva
+PUT {{base}}/2
+Content-Type: application/json
+
+{ "numeroArmario": 2, "nomeAluno": "Bruno Lima", "dataInicio": "2026-11-10", "dataFim": "2026-12-05" }
+
+### Liberar reserva (regra de negócio)
+PATCH {{base}}/2/liberar
+
+### Excluir reserva -> 204
+DELETE {{base}}/3
