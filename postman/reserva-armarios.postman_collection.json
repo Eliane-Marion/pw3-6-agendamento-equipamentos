@@ -1,0 +1,238 @@
+{
+  "info": {
+    "name": "Reserva de Armários - API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Listar reservas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/armarios",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "armarios"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "2. Buscar reserva por id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/armarios/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "armarios",
+            "1"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "3. Criar reserva (armário livre) - 201",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/armarios",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "armarios"
+          ]
+        },
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"numeroArmario\": 4,\n  \"nomeAluno\": \"Diego Alves\",\n  \"dataInicio\": \"2026-11-25\",\n  \"dataFim\": \"2026-12-10\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "4. Criar reserva em conflito - 409",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/armarios",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "armarios"
+          ]
+        },
+        "description": "O armário 1 já está reservado de 01/11 a 15/12: deve retornar 409 Conflict.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"numeroArmario\": 1,\n  \"nomeAluno\": \"Eduarda Costa\",\n  \"dataInicio\": \"2026-12-01\",\n  \"dataFim\": \"2026-12-20\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "5. Criar com data fim antes do início - 400",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/armarios",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "armarios"
+          ]
+        },
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"numeroArmario\": 5,\n  \"nomeAluno\": \"Fábio Rocha\",\n  \"dataInicio\": \"2026-12-10\",\n  \"dataFim\": \"2026-12-01\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "6. Editar reserva",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/armarios/2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "armarios",
+            "2"
+          ]
+        },
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"numeroArmario\": 2,\n  \"nomeAluno\": \"Bruno Lima\",\n  \"dataInicio\": \"2026-11-10\",\n  \"dataFim\": \"2026-12-05\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "7. Liberar reserva (regra)",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/armarios/2/liberar",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "armarios",
+            "2",
+            "liberar"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "8. Excluir reserva - 204",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/armarios/3",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "armarios",
+            "3"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "9. Buscar reserva inexistente - 404",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/armarios/999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "armarios",
+            "999"
+          ]
+        },
+        "description": ""
+      }
+    }
+  ]
+}
