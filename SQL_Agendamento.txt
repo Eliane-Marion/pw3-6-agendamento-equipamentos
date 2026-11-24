@@ -1,0 +1,15 @@
+CREATE DATABASE pw3-agendamento;
+go
+
+USE pw3-agendamento;
+go
+
+CREATE TABLE ReservaArmario (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    numeroArmario INT NOT NULL,
+    nomeAluno VARCHAR(100) NOT NULL,
+    dataInicio DATE NOT NULL,
+    dataFim DATE NOT NULL,
+    ativo BIT NOT NULL DEFAULT 1
+);
+go
